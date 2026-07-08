@@ -9,11 +9,15 @@ project's root to instantly bootstrap the workflow, roles, and rules below.
 
 ## 🚀 How It Works
 
-Development is driven by two triggers issued by the user, defined in full in
-[AGENTS.md](AGENTS.md). Dropped into a codebase that already has files/history, the
-kit auto-detects that on the first `e`/`n` run and audits the real stack, structure,
-and conventions before doing anything else — no separate step needed, though typing
-`i`/`init` forces a re-audit any time (see AGENTS.md §0).
+Development is driven by two triggers issued by the user, plus an onboarding step
+that runs ahead of them when needed — all defined in full in [AGENTS.md](AGENTS.md).
+
+### 0. Adopting Into an Existing Project (auto / `i` / `init`)
+Dropped into a codebase that already has files/history, the kit auto-detects that on
+the first `e`/`n` run and audits the real stack, build/test commands, folder
+structure, and existing conventions before doing anything else — no separate step
+needed on a new project, though typing `i`/`init` forces a re-audit any time (e.g.
+after a big refactor). See AGENTS.md §0.
 
 ### 1. Enhancement Planning (`e` / `enhance`)
 Reads `plans/next-enhancements.md`, then defines exactly 3 numbered `[TODO]`
