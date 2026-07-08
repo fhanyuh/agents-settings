@@ -9,15 +9,8 @@ project's root to instantly bootstrap the workflow, roles, and rules below.
 
 ## 🚀 How It Works
 
-Development is driven by two triggers issued by the user, plus an onboarding step
-that runs ahead of them when needed — all defined in full in [AGENTS.md](AGENTS.md).
-
-### 0. Adopting Into an Existing Project (auto / `i` / `init`)
-Dropped into a codebase that already has files/history, the kit auto-detects that on
-the first `e`/`n` run and audits the real stack, build/test commands, folder
-structure, and existing conventions before doing anything else — no separate step
-needed on a new project, though typing `i`/`init` forces a re-audit any time (e.g.
-after a big refactor). See AGENTS.md §0.
+Development is driven by two triggers issued by the user — all defined in full in
+[AGENTS.md](AGENTS.md).
 
 ### 1. Enhancement Planning (`e` / `enhance`)
 Reads `plans/next-enhancements.md`, then defines exactly 3 numbered `[TODO]`
@@ -29,6 +22,11 @@ a time before writing code (the "Grill Me" step — see AGENTS.md §2a), impleme
 task through the roles in [SKILLS.md](SKILLS.md), verifies build integrity (QA +
 Hardware/Compatibility passes), marks the task `[DONE]`, and documents it in
 `docs/feature-list.md`.
+
+### 3. Iteration Log (automatic)
+Every `e`/`n` run also writes its own dated file to `docs/log/` — what was
+requested, steps taken, what succeeded or failed, the resulting state, and any
+considerations for next time. See AGENTS.md §2b.
 
 Every code file is capped at 256 lines before it must be split — see AGENTS.md §3.
 
@@ -48,6 +46,8 @@ Every code file is capped at 256 lines before it must be split — see AGENTS.md
     plan and task statuses.
 * **`docs/`**
   * **`docs/feature-list.md`** *(updated dynamically)* — structured log of shipped features.
+  * **`docs/log/`** *(updated dynamically)* — one dated file per `e`/`n` iteration:
+    steps taken, outcome, current state, and considerations for next time.
   * **`docs/vibe-coding/`** — per-tool integration guides:
     [Antigravity CLI](docs/vibe-coding/antigravity-cli.md) | [Antigravity IDE](docs/vibe-coding/antigravity-ide.md) |
     [Cursor Composer](docs/vibe-coding/cursor-composer.md) | [Cursor IDE](docs/vibe-coding/cursor-ide.md) |
@@ -63,11 +63,8 @@ Every code file is capped at 256 lines before it must be split — see AGENTS.md
 
 1. Copy `AGENTS.md`, `CLAUDE.md`, `SKILLS.md`, `plans/`, `docs/`, and `data/mockup/`
    into the root of your new project.
-2. **New project**: just type `e`/`enhance` and let the agent draft
-   `plans/next-enhancements.md` from scratch. **Existing project**: the agent
-   auto-detects real files/history on the first `e`/`n` run and audits the actual
-   stack/structure/conventions first (or type `i`/`init` to force that audit anytime)
-   — see AGENTS.md §0.
+2. Type `e`/`enhance` and let the agent draft `plans/next-enhancements.md` from
+   scratch.
 3. Point your tool at `AGENTS.md` if it doesn't read it automatically — see
    `docs/vibe-coding/` for the exact file/setting each tool needs.
 4. Start driving work with `e` and `n` as described above.

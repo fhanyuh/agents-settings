@@ -5,42 +5,6 @@ GitHub Copilot, Aider, etc.) working in a project that uses this starter kit. Ag
 that don't read AGENTS.md natively should be pointed at it via their own config file
 — see `docs/vibe-coding/` for per-tool instructions. `CLAUDE.md` imports this file.
 
-## 0. Adopting Into an Existing Project
-
-This kit auto-detects whether it's landing in a new or existing codebase — no
-separate trigger is required. You can also type "i" / "init" at any time to force a
-re-audit (e.g. after a large refactor or reorg).
-
-**Auto-detection**: the first time "e"/"enhance" or "n"/"next" runs, if
-`plans/next-enhancements.md` is still the empty seed template (or missing) AND the
-repo already contains files/history beyond this kit's own files, treat it as an
-existing project and run the audit below first. Skip it on a genuinely empty/new
-project — there's nothing to audit.
-
-**The audit** (owned by the Software Architect role, see `SKILLS.md`):
-- **Don't overwrite silently.** If the repo already has its own README.md/AGENTS.md/
-  CLAUDE.md, merge additively — append a clearly-marked section pointing at this
-  kit's files rather than deleting existing project-specific instructions.
-- **Discover reality before writing anything**:
-  - Detect the tech stack and real build/test/lint commands (package.json, Makefile,
-    pyproject.toml, etc.).
-  - Map the actual existing folder/module structure — this becomes the section list
-    `e`/`enhance` uses, replacing invented sections.
-  - Scan for files already over the 256-line threshold (§3) and list them as
-    **pre-existing debt**, not a blocker — the rule binds new/touched files going
-    forward, it does not retroactively force-refactor untouched legacy code.
-  - Check for existing equivalents of Demo/Live (§5) or Cloud/Local (§6) patterns;
-    adapt to what's already there instead of introducing a redundant second switch.
-- Seed `plans/next-enhancements.md` sections from the real discovered modules (not
-  blank placeholders); optionally backfill `docs/feature-list.md` with a short
-  "Existing Features (pre-kit)" summary so the log doesn't start misleadingly empty.
-- Record any deviation from this kit's defaults (because the project already does it
-  differently) as a short **Adaptation Notes** subsection appended to the end of this
-  file — so future `e`/`n` runs see local reality, not just the template's
-  assumptions.
-- Once the audit (and any merge/adaptation) is done, `e`/`enhance` and `n`/`next`
-  behave exactly as described below.
-
 ## 1. Trigger "e" or "enhance"
 
 If the user types "e", "enhance", or requests an enhancement plan:
@@ -48,10 +12,11 @@ If the user types "e", "enhance", or requests an enhancement plan:
 - Overwrite or update the active tasks list inside `/plans/next-enhancements.md`.
 - The plan must cover each main section/module of the application.
 - Inside the tasks list, define **exactly 3 new enhancements per section** with:
-  1. A unique number (e.g., `1.1`, `1.2`, `1.3`).
+  1. A unique number (e.g., `1.1`, `1.2`, `1.3`, and so on).
   2. A clear, specific description of the functional change.
   3. A status (initially set to `[TODO]`).
 - Present this plan to the user in your final summary response.
+- Write an iteration log per §2b before finishing.
 
 ## 2. Trigger "n", "next", or "n{x}"
 
@@ -83,6 +48,28 @@ no clear "done" condition). If so:
   - Hardware/Compatibility pass: check cross-platform, cross-browser, and resource
     (memory/CPU) assumptions per `SKILLS.md`.
 - In your final response, state which task(s) were completed and the exact menu/navigation path to see the new feature.
+- Write an iteration log per §2b before finishing — including when the task failed or was only partially completed.
+
+### 2b. Iteration Log (`/docs/log/`)
+
+Every run of "e"/"enhance" or "n"/"next"/"n{x}" must produce its own log file in
+`/docs/log/`, in addition to (not instead of) the `/docs/feature-list.md` update
+in §2. This is a running project diary for future agents and the user.
+
+- **Filename**: `docs/log/<YYYY-MM-DD-HHmm>-<trigger>.md`, e.g.
+  `docs/log/2026-07-08-1430-n2.md` (`trigger` is `e` or `n`/`n{x}`). One file per
+  iteration — never overwrite a previous log.
+- **Content** — factual and skimmable, bullet points over prose:
+  - What was requested, and which task/section numbers (from
+    `/plans/next-enhancements.md`) were touched.
+  - Steps taken, in order — what was tried, including dead ends.
+  - Outcome: what succeeded, what failed (with the actual error text), and how
+    any failure was resolved (or wasn't).
+  - Current state of the codebase/feature after this iteration.
+  - Considerations for next time: open risks, deliberately deferred TODOs,
+    assumptions made, anything a future agent should know before continuing.
+- Mandatory even on failure or partial completion — log the failure and current
+  state rather than skipping the log entry.
 
 ## 3. File Size & Refactoring Rules
 
