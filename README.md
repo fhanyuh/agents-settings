@@ -10,7 +10,10 @@ project's root to instantly bootstrap the workflow, roles, and rules below.
 ## 🚀 How It Works
 
 Development is driven by two triggers issued by the user, defined in full in
-[AGENTS.md](AGENTS.md):
+[AGENTS.md](AGENTS.md). Dropped into a codebase that already has files/history, the
+kit auto-detects that on the first `e`/`n` run and audits the real stack, structure,
+and conventions before doing anything else — no separate step needed, though typing
+`i`/`init` forces a re-audit any time (see AGENTS.md §0).
 
 ### 1. Enhancement Planning (`e` / `enhance`)
 Reads `plans/next-enhancements.md`, then defines exactly 3 numbered `[TODO]`
@@ -56,8 +59,11 @@ Every code file is capped at 256 lines before it must be split — see AGENTS.md
 
 1. Copy `AGENTS.md`, `CLAUDE.md`, `SKILLS.md`, `plans/`, `docs/`, and `data/mockup/`
    into the root of your new project.
-2. Edit `plans/next-enhancements.md` to reflect your project's actual
-   sections/modules (or just type `e`/`enhance` and let the agent draft it).
+2. **New project**: just type `e`/`enhance` and let the agent draft
+   `plans/next-enhancements.md` from scratch. **Existing project**: the agent
+   auto-detects real files/history on the first `e`/`n` run and audits the actual
+   stack/structure/conventions first (or type `i`/`init` to force that audit anytime)
+   — see AGENTS.md §0.
 3. Point your tool at `AGENTS.md` if it doesn't read it automatically — see
    `docs/vibe-coding/` for the exact file/setting each tool needs.
 4. Start driving work with `e` and `n` as described above.

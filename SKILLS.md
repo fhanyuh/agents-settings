@@ -15,9 +15,13 @@ Hardware/Compatibility.
   decide the split boundary before anyone patches around it.
 - Keep the overall plan (`plans/next-enhancements.md`) structured by real
   module/section boundaries, not arbitrary groupings.
+- Owns the existing-project audit (`AGENTS.md` §0): discovers the real stack, build/
+  test commands, folder structure, and existing conventions before any section or
+  task is defined, so the plan reflects reality instead of invented sections.
 
 **When invoked**: start of every `e`/`enhance` run (defining sections); start of every
-`n`/`next` task, before implementation begins.
+`n`/`next` task, before implementation begins; and at the start of an auto-detected
+or explicit `i`/`init` audit in an existing codebase.
 
 **Handoff**: hands the Backend/Frontend roles a target file layout and interface
 contract, not just a task description.
